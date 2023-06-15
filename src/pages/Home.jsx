@@ -2,16 +2,23 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase.config/FireBase";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Alert from "../components/Login/Alert";
 function Home() {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState("");
   const { user, logout, loading } = useAuth();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await logout();
-    // navigate("/login");
+    setError("");
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      setError("Ha ocurrido un error, por favor inténtelo de nuevo más tarde");
+    }
   };
 
   if (loading) {
@@ -29,8 +36,25 @@ function Home() {
 
   return (
     <div>
-      <h1>Usuario: {user?.displayName || user?.email}</h1>
-      <button onClick={handleLogout}>Logout</button>
+      <div
+        style={{
+          width: "40%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          backgroundColor: "gray",
+          padding: "1rem",
+        }}
+      >
+        {error && <Alert message={error} />}
+        <img
+          style={{ width: "5rem", borderRadius: "50%" }}
+          src={user?.photoURL}
+          alt=""
+        />
+        <h1>Usuario: {user?.displayName || user?.email}</h1>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
 
       {products.map((product) => (
         <div

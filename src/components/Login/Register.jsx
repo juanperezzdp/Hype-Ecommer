@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 function Register() {
   const [user, setUser] = useState({
@@ -29,13 +30,15 @@ function Register() {
         setError("Email no valido");
       } else if (error.code === "auth/weak-password") {
         setError("La contraseña debe tener al menos 6 caracteres");
+      } else if (error.code === "auth/email-already-in-use") {
+        setError("El correo electrónico ya está registrado.");
       }
     }
   };
 
   return (
     <div>
-      {error && <p>{error}</p>}
+      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input

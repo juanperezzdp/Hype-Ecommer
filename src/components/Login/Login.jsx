@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 function Login() {
   const [user, setUser] = useState({
@@ -9,11 +10,34 @@ function Login() {
   });
   const [error, setError] = useState("");
 
-  const { login } = useAuth();
+  const { login, loginWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
+  };
+
+  const handleGoogle = async () => {
+    try {
+      await loginWithGoogle();
+      navigate("/");
+    } catch (error) {
+      setError("Email no valida");
+    }
+  };
+
+  const handleResetPassword = async () => {
+    if (!user.email) {
+      return setError("Por favor, ingresa tu correo electrónico");
+    }
+    try {
+      await resetPassword(user.email);
+      setError(
+        "Te hemos enviado un correo electrónico para que verifiques tu contraseña"
+      );
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -26,16 +50,18 @@ function Login() {
       navigate("/");
     } catch (error) {
       if (error.code === "auth/user-not-found") {
-        setError("No estas registrado. Por favor registrate!");
+        setError("El usuario no existe.");
       } else if (error.code === "auth/wrong-password") {
         setError("Contraseña no valida");
+      } else if (error.code === "auth/invalid-email") {
+        setError("Email no valido");
       }
     }
   };
 
   return (
     <div>
-      {error && <p>{error}</p>}
+      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -51,8 +77,18 @@ function Login() {
           name="password"
           placeholder="******"
         />
-        <button>Login</button>
+        <div>
+          <button>Login</button>
+          <br />
+          <Link to="#!" onClick={handleResetPassword}>
+            Recuperar contraseña
+          </Link>
+          <br />
+          <Link to="/register">Registrate</Link>
+        </div>
       </form>
+
+      <button onClick={handleGoogle}>Iniciar sesión con Google</button>
     </div>
   );
 }
