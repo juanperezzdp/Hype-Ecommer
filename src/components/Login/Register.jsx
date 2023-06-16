@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import { AiOutlineClose } from "react-icons/ai";
 
-function Register() {
+function Register({ setHidden }) {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -38,23 +39,28 @@ function Register() {
 
   return (
     <div>
-      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+        {error && <Alert message={error} />}
+        <AiOutlineClose className="x" onClick={() => setHidden(true)} />
+        <h1>¡Registrate!</h1>
+        <p>
+          Ingresa tus email y una contraseña para que conozca todos nuestros
+          productos
+        </p>
         <input
           onChange={handleChange}
           type="email"
           name="email"
-          placeholder="youremail@company.com"
+          placeholder="tuemail@company.com"
         />
-        <label htmlFor="password">Password</label>
+
         <input
           onChange={handleChange}
           type="password"
           name="password"
-          placeholder="******"
+          placeholder="Contraseña"
         />
-        <button>Register</button>
+        <button>Regístrase</button>
       </form>
     </div>
   );

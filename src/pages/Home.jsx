@@ -15,7 +15,7 @@ function Home() {
     setError("");
     try {
       await logout();
-      navigate("/login");
+      navigate("/loginpage");
     } catch (error) {
       setError("Ha ocurrido un error, por favor inténtelo de nuevo más tarde");
     }
@@ -47,11 +47,7 @@ function Home() {
         }}
       >
         {error && <Alert message={error} />}
-        <img
-          style={{ width: "5rem", borderRadius: "50%" }}
-          src={user?.photoURL}
-          alt=""
-        />
+        <img className="gg" src={user?.photoURL} alt="" />
         <h1>Usuario: {user?.displayName || user?.email}</h1>
         <button onClick={handleLogout}>Logout</button>
       </div>

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.container-login{
+    background-image: url("../../img/sala.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+.container-title{
+    width: 40rem;
+    margin-right: 3rem;
+.title-new{
+    font-family: 'Great Vibes', cursive;
+    margin-bottom: -1.5rem;
+    font-size: 3rem;
+}
+
+.title-colletion{
+    font-family: 'Archivo';
+    font-weight: 600;
+    font-size: 4.5rem;
+    color: rgb(0, 0, 0);
+  
+}
+}
+
+}

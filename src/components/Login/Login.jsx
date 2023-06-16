@@ -2,15 +2,18 @@ import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import { FaFacebook } from "react-icons/fa";
+import { ImGooglePlus3 } from "react-icons/im";
 
-function Login() {
+function Login({ setHidden }) {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
 
-  const { login, loginWithGoogle, resetPassword } = useAuth();
+  const { login, loginWithGoogle, resetPassword, loginWithFacebook } =
+    useAuth();
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -23,6 +26,14 @@ function Login() {
       navigate("/");
     } catch (error) {
       setError("Email no valida");
+    }
+  };
+  const handleFacebook = async () => {
+    try {
+      await loginWithFacebook();
+      navigate("/");
+    } catch (error) {
+      setError("Cuenta no valida");
     }
   };
 
@@ -61,34 +72,43 @@ function Login() {
 
   return (
     <div>
-      {error && <Alert message={error} />}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+        {error && <Alert message={error} />}
+        <h1>¡Hola amigo!</h1>
+        <p>Ingresa tus datos personales y conoce tus muebles ideales</p>
         <input
           onChange={handleChange}
           type="email"
           name="email"
-          placeholder="youremail@company.com"
+          placeholder="tuemail@company.com"
         />
-        <label htmlFor="password">Password</label>
         <input
           onChange={handleChange}
           type="password"
           name="password"
-          placeholder="******"
+          placeholder="Contraseña"
         />
         <div>
-          <button>Login</button>
-          <br />
-          <Link to="#!" onClick={handleResetPassword}>
-            Recuperar contraseña
-          </Link>
-          <br />
-          <Link to="/register">Registrate</Link>
+          <button>Iniciar sesión</button>
+          <div className="container-register">
+            <Link to="#!" onClick={handleResetPassword}>
+              Recuperar contraseña
+            </Link>
+            <br />
+            <button
+              onClick={() => {
+                setHidden(false);
+              }}
+            >
+              Regístrate
+            </button>
+          </div>
+        </div>
+        <div>
+          <FaFacebook className="icons" onClick={handleFacebook} />
+          <ImGooglePlus3 className="icons" onClick={handleGoogle} />
         </div>
       </form>
-
-      <button onClick={handleGoogle}>Iniciar sesión con Google</button>
     </div>
   );
 }
