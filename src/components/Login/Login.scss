@@ -32,7 +32,7 @@ form{
     background-color: white;
     margin: 0.5rem;
     animation-name: slideIn;
-    animation-duration: 2s;
+    animation-duration: 3s;
     animation-fill-mode: both;
     margin-left: 10rem;
     display: flex;
@@ -120,9 +120,13 @@ form{
     }
 
   }
-
-
   
+}
+
+@media (max-width: 600px) {
+  form{
+    margin-left: 1rem;
+  }
 }
 
 

@@ -27,7 +27,30 @@
     font-size: 4.5rem;
     color: rgb(0, 0, 0);
   
-}
+    }
+    }
 }
 
-}
+@media (max-width: 600px) {
+    .container-login {
+      background-image: url("../../img/Sofa-reponsive.jpg");
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+
+      .container-title{
+        margin-right: 1px;
+        width: 24rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    .title-new{
+        margin-bottom: 0.5rem;
+    }
+    
+    .title-colletion{
+        font-size: 3rem;
+        }
+     }
+    }
+  }
