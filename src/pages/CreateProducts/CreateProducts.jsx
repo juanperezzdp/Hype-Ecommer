@@ -24,7 +24,7 @@ function CreateProducts() {
     e.preventDefault();
     try {
       const urls = await Promise.all(files.map(uploadFile));
-      alert("Se han subido con éxito las imágenes");
+      alert("Se han subido con éxito el productos");
       console.log(urls);
 
       const productsCollection = collection(db, "products");
@@ -35,43 +35,82 @@ function CreateProducts() {
         stock: stock,
         urls: urls,
       });
+
+      // Limpiar el formulario después de enviar
+      handleFormReset();
     } catch (error) {
       alert("Intente más tarde");
     }
   };
 
+  const handleFormReset = () => {
+    // Limpiar el formulario al hacer clic en "Limpiar"
+    setFiles(null);
+    setTitle("");
+    setDescription("");
+    setPrice(0);
+    setStock(0);
+  };
+
   return (
     <div className="background">
       <h1>Crear productos en base de datos</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Titulo"
-          type="text"
-          name=""
-          id=""
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          placeholder="Precio"
-          type="number"
-          name=""
-          id=""
-          accept="image/*"
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <input
-          placeholder="Stock"
-          type="number"
-          name=""
-          id=""
-          accept="image/*"
-          onChange={(e) => setStock(e.target.value)}
-        />
+      <form
+        className="form-creater"
+        onSubmit={handleSubmit}
+        onReset={handleFormReset}
+      >
+        <div>
+          <label className="label-create" htmlFor="Titulo">
+            Titulo:
+          </label>
+          <input
+            className="input-create"
+            placeholder="Titulo"
+            type="text"
+            name="Titulo"
+            id="Titulo"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="label-create" htmlFor="Precio">
+            Precio:
+          </label>
+          <input
+            className="input-create"
+            placeholder="Precio"
+            type="number"
+            name="Precio"
+            id="Precio"
+            accept="image/*"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label className="label-create" htmlFor="Stock">
+            Stock:
+          </label>
+          <input
+            className="input-create"
+            placeholder="Stock"
+            type="number"
+            name="Stock"
+            id="Stock"
+            accept="image/*"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+          />
+        </div>
         <textarea
           placeholder="Descripcion"
           type=""
           name=""
           id=""
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <input
@@ -83,7 +122,9 @@ function CreateProducts() {
           multiple
           onChange={(e) => setFiles(Array.from(e.target.files))}
         />
-        <button>Subir Productos</button>
+        <button className="button-create" type="submit">
+          Subir Productos
+        </button>
       </form>
     </div>
   );

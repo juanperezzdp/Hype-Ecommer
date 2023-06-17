@@ -39,7 +39,7 @@ function Register({ setHidden }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="form-login" onSubmit={handleSubmit}>
         {error && <Alert message={error} />}
         <AiOutlineClose className="x" onClick={() => setHidden(true)} />
         <h1>¡Registrate!</h1>
@@ -60,7 +60,7 @@ function Register({ setHidden }) {
           name="password"
           placeholder="Contraseña"
         />
-        <button>Regístrase</button>
+        <button type="submit">Regístrase</button>
       </form>
     </div>
   );

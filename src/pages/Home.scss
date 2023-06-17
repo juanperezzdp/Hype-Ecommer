@@ -1,0 +1,99 @@
+.container-wrap{
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+    
+
+
+    .container-pruducts{
+        width: 17rem;
+        height: 25rem;
+        border-radius: 2rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(128, 128, 128, 0.458);
+        
+
+
+        .container-img-products{
+            width: 17rem;
+            height: 16rem;
+            
+        }
+
+
+        .container-title-products{
+            display: flex;
+            justify-content: space-between;
+            width: 15rem;
+            height: 5.5rem;
+            margin: 0 0.5rem;
+            
+
+            .container-title-description{
+                
+                .price{
+                    margin-top: 0.5rem;
+                }
+            }
+
+            .stock{
+                font-size: 0.7rem;
+                background-color: darkred;
+                height: 1.8rem;
+                text-align: center;
+                color: white;
+                padding: 0.5rem;
+                border-radius: 0.2rem;
+            }
+
+
+        }
+        .container-btn-shopping{
+            width: 17rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            
+
+            .btn-shopping{
+                height: 2rem;
+                width: 8rem;
+                border: none;
+                background-color: seagreen;
+                border-radius: 2rem;
+                color: white;
+                font-size: 1rem;
+                cursor: pointer;
+
+                &:hover{
+                    border: 2px solid seagreen;
+                    background-color: white;
+                    color:seagreen;
+                }
+            }
+            .btn-add{
+                height: 2rem;
+                width: 8rem;
+                border: 2px solid seagreen;
+                background-color: white;
+                border-radius: 2rem;
+                color:seagreen;
+                font-size: 1rem;
+
+                &:hover{
+                    border: none;
+                    background-color: seagreen;
+                    color: white;
+                }
+            }
+        }
+    }
+
+}
+
+

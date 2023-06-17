@@ -31,7 +31,7 @@ function Login({ setHidden }) {
   const handleFacebook = async () => {
     try {
       await loginWithFacebook();
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       setError("Cuenta no valida");
     }
@@ -72,7 +72,7 @@ function Login({ setHidden }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="form-login" onSubmit={handleSubmit}>
         {error && <Alert message={error} />}
         <h1>¡Hola amigo!</h1>
         <p>Ingresa tus datos personales y conoce tus muebles ideales</p>
