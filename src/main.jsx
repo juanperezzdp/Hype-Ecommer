@@ -1,6 +1,8 @@
+// src/main.jsx
+
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { router } from "./routers/Router";
+import router from "./routers/Router";
 import { RouterProvider } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import "./GlobalStyle.scss";
