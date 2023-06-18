@@ -14,7 +14,7 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        border: 1px solid rgba(128, 128, 128, 0.458);
+        
         
 
 
@@ -85,6 +85,7 @@
                 border-radius: 2rem;
                 color:seagreen;
                 font-size: 1rem;
+                cursor: pointer;
 
                 &:hover{
                     border: none;

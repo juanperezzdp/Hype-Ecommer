@@ -7,12 +7,12 @@ import { getAuth } from '@firebase/auth'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCN1yx3SdXlvKz7oCIt9jmD6Lo4Yod1pfo",
-  authDomain: "hype-84921.firebaseapp.com",
-  projectId: "hype-84921",
-  storageBucket: "hype-84921.appspot.com",
-  messagingSenderId: "597730441156",
-  appId: "1:597730441156:web:daa8d897c26e45dc3d9691"
+  apiKey: "AIzaSyD4gzEw6At-ZTBUCCe0vgTLRQW8AAK4BY0",
+  authDomain: "hypepueba.firebaseapp.com",
+  projectId: "hypepueba",
+  storageBucket: "hypepueba.appspot.com",
+  messagingSenderId: "233126625541",
+  appId: "1:233126625541:web:62eebcb95bc6add9b3b76c"
 };
 
 const app = initializeApp(firebaseConfig);

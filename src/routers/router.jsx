@@ -1,10 +1,10 @@
-// src/routers/Router.jsx
-
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home";
+import IndexHome from "../pages/IndexHome";
 import CreateProducts from "../pages/CreateProducts/CreateProducts";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import { ProtectedRoute } from "../components/Login/ProtectedRoute";
+import ShoppingCart from "../components/ShoppingCart/ShoppingCart";
+import { CartProvider } from "../context/cartContext";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,9 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-        <Home />
+        <CartProvider>
+          <IndexHome />
+        </CartProvider>
       </ProtectedRoute>
     ),
   },
@@ -24,6 +26,16 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <CreateProducts />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/shoppingcart",
+    element: (
+      <ProtectedRoute>
+        <CartProvider>
+          <ShoppingCart />
+        </CartProvider>
       </ProtectedRoute>
     ),
   },
