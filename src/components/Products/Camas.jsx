@@ -1,14 +1,14 @@
 import { useEffect, useReducer, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase.config/FireBase";
-import "./Home.scss";
-import { CartProvider, cartReducer } from "../context/cartContext";
+import { db } from "../../firebase.config/FireBase";
+import "./CartStyle.scss";
+import { CartProvider, cartReducer } from "../../context/cartContext";
 
-function Home() {
+function Camas() {
   const [state, dispatch] = useReducer(cartReducer, { cartItems: [] });
   const [products, setProducts] = useState([]);
 
-  const productsCollection = collection(db, "products");
+  const productsCollection = collection(db, "camas");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -39,7 +39,7 @@ function Home() {
         <div className="container-wrap">
           {products.map((product) => (
             <>
-              <div className="container-pruducts" key={product.id}>
+              <div className="container-pruducts" key={product.title}>
                 <div>
                   <img
                     className="container-img-products"
@@ -79,4 +79,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Camas;

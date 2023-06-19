@@ -1,10 +1,9 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const CartContext = createContext({
   cartItems: [],
-  contador: 0,
+
   dispatch: () => {},
-  setContador: () => {},
 });
 
 export const cartReducer = (state, action) => {
@@ -32,16 +31,13 @@ export const cartReducer = (state, action) => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [contador, setContador] = useState(0);
   const [state, dispatch] = useReducer(cartReducer, { cartItems: [] });
 
   return (
     <CartContext.Provider
       value={{
         cartItems: state.cartItems,
-        contador,
         dispatch,
-        setContador,
       }}
     >
       {children}

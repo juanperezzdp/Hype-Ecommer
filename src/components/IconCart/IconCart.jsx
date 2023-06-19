@@ -12,10 +12,14 @@ function IconCart() {
     navigate("/shoppingcart");
   };
 
+  console.log("Valor de contador:", contador);
+
   return (
     <div className="container-btn-pt">
       <div
-        style={{ backgroundColor: contador === 0 ? "#000000a6" : "#2e8b56" }}
+        style={{
+          backgroundColor: contador === 0 ? "#000000a6" : "#2e8b56",
+        }}
         className="container-btn-cart"
         onClick={handleNavigateShopping}
       >
@@ -25,7 +29,7 @@ function IconCart() {
           ) : (
             <BsCartCheck className="icon-btn" />
           )}
-          <p>{contador}</p>
+          {contador && <p>{contador}</p>}
         </div>
       </div>
     </div>

@@ -1,11 +1,10 @@
 import { useContext, useEffect } from "react";
-import { CartContext } from "../../context/cartContext";
-import "../../pages/Home.scss";
+import "../../components/Products/CartStyle.scss";
 import IconCart from "../IconCart/IconCart";
+import { CartContext } from "../../context/cartContext";
 
 function ShoppingCart() {
-  const { cartItems, contador, dispatch, setContador } =
-    useContext(CartContext);
+  const { cartItems, dispatch } = useContext(CartContext);
 
   const removeFromCart = (product) => {
     const index = cartItems.findIndex((item) => item.id === product.id);
@@ -13,7 +12,6 @@ function ShoppingCart() {
       const updatedCartItems = [...cartItems];
       updatedCartItems.splice(index, 1);
       dispatch({ type: "SET_CART_ITEMS", payload: updatedCartItems });
-      setContador((prevContador) => prevContador - 1);
       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     }
   };
@@ -23,13 +21,12 @@ function ShoppingCart() {
     if (savedCartItems) {
       const parsedCartItems = JSON.parse(savedCartItems);
       dispatch({ type: "SET_CART_ITEMS", payload: parsedCartItems });
-      setContador(parsedCartItems.length);
     }
-  }, [dispatch, setContador]);
+  }, [dispatch]);
 
   return (
     <>
-      <h1>Productos: {contador}</h1>
+      <h1>Productos:</h1>
       <div className="container-wrap">
         {cartItems.map((product, index) => (
           <>
@@ -67,7 +64,7 @@ function ShoppingCart() {
             </div>
           </>
         ))}
-        <IconCart contador={contador} />
+        <IconCart />
       </div>
     </>
   );

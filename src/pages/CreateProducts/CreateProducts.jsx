@@ -12,6 +12,7 @@ function CreateProducts() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const uploadFile = async (file) => {
     const storageRef = ref(storage, v4());
@@ -27,7 +28,7 @@ function CreateProducts() {
       alert("Se han subido con éxito el productos");
       console.log(urls);
 
-      const productsCollection = collection(db, "products");
+      const productsCollection = collection(db, `${selectedOption}`);
       await addDoc(productsCollection, {
         title: title,
         description: description,
@@ -52,14 +53,24 @@ function CreateProducts() {
     setStock(0);
   };
 
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   return (
     <div className="background">
-      <h1>Crear productos en base de datos</h1>
+      <h1 className="h1">Crear productos en base de datos</h1>
       <form
         className="form-creater"
         onSubmit={handleSubmit}
         onReset={handleFormReset}
       >
+        <div className="container-select">
+          <select value={selectedOption} onChange={handleSelectChange}>
+            <option value="products">Sofas</option>
+            <option value="camas">Camas</option>
+          </select>
+        </div>
         <div>
           <label className="label-create" htmlFor="Titulo">
             Titulo:
@@ -114,6 +125,7 @@ function CreateProducts() {
           onChange={(e) => setDescription(e.target.value)}
         />
         <input
+          className="input-create"
           placeholder="Elegir Imagenes"
           type="file"
           name=""

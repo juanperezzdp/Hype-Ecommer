@@ -1,42 +1,64 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import IconCart from "../IconCart/IconCart";
+import ModalUser from "./ModalUser";
 import { useAuth } from "../../Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import Alert from "../Login/Alert";
+import "./Navbar.scss";
 
 function Navbar() {
-  const [error, setError] = useState("");
-  const { user, logout, loading } = useAuth();
+  const [modalUser, setModalUser] = useState(false);
+  const [scrolled, setScrolled] = useState(false); // Estado para controlar el scroll
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    setError("");
-    try {
-      await logout();
-      navigate("/loginpage");
-    } catch (error) {
-      setError("Ha ocurrido un error, por favor inténtelo de nuevo más tarde");
-    }
-  };
-
-  if (loading) {
-    return <h1>cargando...</h1>;
-  }
   return (
-    <div
-      style={{
-        width: "40%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: "gray",
-        padding: "1rem",
-      }}
-    >
-      {error && <Alert message={error} />}
-      <img className="gg" src={user?.photoURL} alt="" />
-      <h1>Usuario: {user?.displayName || user?.email}</h1>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <>
+      <nav className={scrolled ? "nav-scrolled-white" : "nav-scrolled"}>
+        <ul>
+          <li
+            className={scrolled ? "btn-white" : "btn-transparent"}
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Inicio
+          </li>
+          <li
+            className={scrolled ? "btn-white" : "btn-transparent"}
+            onClick={() => {
+              navigate("/indexcamas");
+            }}
+          >
+            Camas
+          </li>
+        </ul>
+        <img
+          onClick={() => setModalUser(!modalUser)}
+          className="user"
+          src={user?.photoURL}
+          alt=""
+        />
+        {modalUser && (
+          <ModalUser userModal={modalUser} setModalUser={setModalUser} />
+        )}
+      </nav>
+
+      <IconCart />
+    </>
   );
 }
 
