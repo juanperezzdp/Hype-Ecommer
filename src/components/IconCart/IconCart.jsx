@@ -12,8 +12,6 @@ function IconCart() {
     navigate("/shoppingcart");
   };
 
-  console.log("Valor de contador:", contador);
-
   return (
     <div className="container-btn-pt">
       <div

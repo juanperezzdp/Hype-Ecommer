@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ProtectedRoute } from "../components/Login/ProtectedRoute";
+import { CartProvider } from "../context/cartContext";
 import IndexHome from "../pages/Home/IndexHome";
 import CreateProducts from "../pages/CreateProducts/CreateProducts";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import { ProtectedRoute } from "../components/Login/ProtectedRoute";
 import ShoppingCart from "../components/ShoppingCart/ShoppingCart";
-import { CartProvider } from "../context/cartContext";
 import IndexCamas from "../pages/Camas/IndexCamas";
+import DetailsProducts from "../components/DetailsProducts/DetailsProducts";
 
 function App() {
   return (
@@ -42,6 +43,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <IndexCamas />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/detailsproducts/:productId"
+            element={
+              <ProtectedRoute>
+                <DetailsProducts />
               </ProtectedRoute>
             }
           />

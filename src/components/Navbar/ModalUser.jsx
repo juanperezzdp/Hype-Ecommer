@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import Alert from "../Login/Alert";
 import Loading from "../Loading/Loading";
+import UserDefault from "../../img/UserDefault.png";
 
-function ModalUser({ userModal, setModalUser }) {
+function ModalUser({ modalUser, setModalUser }) {
   const [error, setError] = useState("");
   const { user, logout, loading } = useAuth();
   const navigate = useNavigate();
@@ -23,14 +24,19 @@ function ModalUser({ userModal, setModalUser }) {
   if (loading) {
     return <Loading />;
   }
+  console.log(user);
   return (
     <div className="container-modal">
       {error && <Alert message={error} />}
       <AiOutlineClose
-        onClick={() => setModalUser(!userModal)}
+        onClick={() => setModalUser(!modalUser)}
         className="x-modal"
       />
-      <img className="user-modal" src={user?.photoURL} alt="" />
+      <img
+        className="user-modal"
+        src={user?.photoURL || UserDefault}
+        alt="user"
+      />
       <h3>Usuario: {user?.displayName || user?.email}</h3>
       <button className="btn-modal" onClick={handleLogout}>
         Logout

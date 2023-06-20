@@ -3,10 +3,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.config/FireBase";
 import "./CartStyle.scss";
 import { CartProvider, cartReducer } from "../../context/cartContext";
+import { useNavigate } from "react-router-dom";
 
 function Sofa() {
   const [state, dispatch] = useReducer(cartReducer, { cartItems: [] });
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   const productsCollection = collection(db, "products");
 
@@ -27,6 +29,12 @@ function Sofa() {
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
+  const handleDataClick = (product) => {
+    navigate(`/detailsproducts/${product.id}`, {
+      state: { detailData: product },
+    });
+  };
+
   return (
     <>
       <CartProvider
@@ -38,40 +46,43 @@ function Sofa() {
       >
         <div className="container-wrap">
           {products.map((product) => (
-            <>
-              <div className="container-pruducts" key={product.title}>
-                <div>
-                  <img
-                    className="container-img-products"
-                    src={product.urls}
-                    alt="Img"
-                  />
-                </div>
-                <div>
-                  <div className="container-title-products">
-                    <div className="container-title-description">
-                      <h3>{product.title.toString()}</h3>
-                      <p className="price">
-                        $
-                        {typeof product.price === "string" &&
-                          parseFloat(product.price).toLocaleString("es-CO")}
-                      </p>
-                    </div>
-
-                    <p className="stock">-{product.stock}%</p>
+            <div className="container-pruducts" key={product.title}>
+              <div>
+                <img
+                  className="container-img-products"
+                  src={product.urls}
+                  alt="Img"
+                />
+              </div>
+              <div>
+                <div className="container-title-products">
+                  <div className="container-title-description">
+                    <h3>{product.title.toString()}</h3>
+                    <p className="price">
+                      $
+                      {typeof product.price === "string" &&
+                        parseFloat(product.price).toLocaleString("es-CO")}
+                    </p>
                   </div>
-                </div>
-                <div className="container-btn-shopping">
-                  <button
-                    className="btn-shopping"
-                    onClick={() => addToCart(product)}
-                  >
-                    Añadir al carrito
-                  </button>
-                  <button className="btn-add">Ver detalles</button>
+
+                  <p className="stock">-{product.stock}%</p>
                 </div>
               </div>
-            </>
+              <div className="container-btn-shopping">
+                <button
+                  className="btn-shopping"
+                  onClick={() => addToCart(product)}
+                >
+                  Añadir al carrito
+                </button>
+                <button
+                  className="btn-add"
+                  onClick={() => handleDataClick(product)}
+                >
+                  Ver detalles
+                </button>
+              </div>
+            </div>
           ))}
         </div>
       </CartProvider>

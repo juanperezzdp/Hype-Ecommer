@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import IconCart from "../IconCart/IconCart";
 import ModalUser from "./ModalUser";
 import { useAuth } from "../../Hooks/useAuth";
 import "./Navbar.scss";
+import UserDefault from "../../img/UserDefault.png";
 
 function Navbar() {
   const [modalUser, setModalUser] = useState(false);
@@ -45,15 +46,25 @@ function Navbar() {
           >
             Camas
           </li>
+          <li
+            className={scrolled ? "btn-white" : "btn-transparent"}
+            onClick={() => {
+              navigate("/indexsofa");
+            }}
+          >
+            Sofa
+          </li>
         </ul>
+
         <img
           onClick={() => setModalUser(!modalUser)}
           className="user"
-          src={user?.photoURL}
-          alt=""
+          src={user?.photoURL || UserDefault}
+          alt="user"
         />
+
         {modalUser && (
-          <ModalUser userModal={modalUser} setModalUser={setModalUser} />
+          <ModalUser modalUser={modalUser} setModalUser={setModalUser} />
         )}
       </nav>
 
