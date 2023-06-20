@@ -8,7 +8,7 @@ import ShoppingCart from "../components/ShoppingCart/ShoppingCart";
 import IndexCamas from "../pages/Camas/IndexCamas";
 import DetailsProducts from "../components/DetailsProducts/DetailsProducts";
 
-function App() {
+function Routers() {
   return (
     <CartProvider>
       <Router>
@@ -35,4 +35,4 @@ function App() {
   );
 }
 
-export default App;
+export default Routers;
