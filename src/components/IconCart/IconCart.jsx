@@ -16,7 +16,7 @@ function IconCart() {
     <div className="container-btn-pt">
       <div
         style={{
-          backgroundColor: contador === 0 ? "#000000a6" : "#2e8b56",
+          backgroundColor: contador === 1 ? "#000000a6" : "#2e8b56",
         }}
         className="container-btn-cart"
         onClick={handleNavigateShopping}

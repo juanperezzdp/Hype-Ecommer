@@ -37,42 +37,53 @@ function Camas() {
         }}
       >
         <div className="container-wrap">
-          {products.map((product) => (
-            <>
-              <div className="container-pruducts" key={product.title}>
-                <div>
-                  <img
-                    className="container-img-products"
-                    src={product.urls}
-                    alt="Img"
-                  />
-                </div>
-                <div>
-                  <div className="container-title-products">
-                    <div className="container-title-description">
-                      <h3>{product.title.toString()}</h3>
-                      <p className="price">
-                        $
-                        {typeof product.price === "string" &&
-                          parseFloat(product.price).toLocaleString("es-CO")}
-                      </p>
-                    </div>
+          {products.map((product) => {
+            const discount =
+              (parseFloat(product.price) * parseFloat(product.stock)) / 100;
+            const discountedPrice = parseFloat(product.price) - discount;
+            const formattedDiscountedPrice =
+              discountedPrice.toLocaleString("es-CO");
 
-                    <p className="stock">-{product.stock}%</p>
+            return (
+              <>
+                <div className="container-pruducts" key={product.title}>
+                  <div>
+                    <img
+                      className="container-img-products"
+                      src={product.urls}
+                      alt="Img"
+                    />
+                  </div>
+                  <div className="container-products-title-price">
+                    <div className="container-title-products">
+                      <div className="container-title-description-price">
+                        <h3>{product.title.toString()}</h3>
+                        <p className="price">
+                          $
+                          {typeof product.price === "string" &&
+                            parseFloat(product.price).toLocaleString("es-CO")}
+                        </p>
+                        <p className="total-price">
+                          $ {formattedDiscountedPrice}
+                        </p>
+                      </div>
+
+                      <p className="stock">-{product.stock}%</p>
+                    </div>
+                  </div>
+                  <div className="container-btn-shopping">
+                    <button
+                      className="btn-shopping"
+                      onClick={() => addToCart(product)}
+                    >
+                      Añadir al carrito
+                    </button>
+                    <button className="btn-add">Ver detalles</button>
                   </div>
                 </div>
-                <div className="container-btn-shopping">
-                  <button
-                    className="btn-shopping"
-                    onClick={() => addToCart(product)}
-                  >
-                    Añadir al carrito
-                  </button>
-                  <button className="btn-add">Ver detalles</button>
-                </div>
-              </div>
-            </>
-          ))}
+              </>
+            );
+          })}
         </div>
       </CartProvider>
     </>

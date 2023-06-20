@@ -72,8 +72,9 @@
     .user{
         width: 3rem;
         border-radius: 50%;
+        background-color: white;
         cursor: pointer;
-        background-color: aqua;
+        
 
         &:hover{
           width: 3.3rem;
@@ -85,7 +86,9 @@
         top: 1rem; 
         right: 1rem; 
         width: 15rem;
-        height: 10rem;
+        height: 15rem;
+        gap: 1rem;
+        padding: 0 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -107,6 +110,21 @@
             border-radius: 50%;
             margin: 1rem 0;
 
+        }
+
+        .user-info{
+            width: 14rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+
+            .user-email{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
         }
 
         .btn-modal{

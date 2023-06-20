@@ -15,7 +15,8 @@ function ModalUser({ modalUser, setModalUser }) {
     setError("");
     try {
       await logout();
-      navigate("/loginpage");
+      navigate("/");
+      setModalUser(!modalUser);
     } catch (error) {
       setError("Ha ocurrido un error, por favor inténtelo de nuevo más tarde");
     }
@@ -37,9 +38,11 @@ function ModalUser({ modalUser, setModalUser }) {
         src={user?.photoURL || UserDefault}
         alt="user"
       />
-      <h3>Usuario: {user?.displayName || user?.email}</h3>
+      <div className="user-info">
+        <h3 className="user-email">{user?.displayName || user?.email}</h3>
+      </div>
       <button className="btn-modal" onClick={handleLogout}>
-        Logout
+        Cerrar sesión
       </button>
     </div>
   );

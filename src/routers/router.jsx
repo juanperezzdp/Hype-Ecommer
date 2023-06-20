@@ -13,23 +13,9 @@ function App() {
     <CartProvider>
       <Router>
         <Routes>
+          <Route path="/" element={<IndexHome />} />
           <Route path="/loginpage" element={<LoginPage />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <IndexHome />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/createproducts"
-            element={
-              <ProtectedRoute>
-                <CreateProducts />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/createproducts" element={<CreateProducts />} />
           <Route
             path="/shoppingcart"
             element={
@@ -38,21 +24,10 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/indexcamas"
-            element={
-              <ProtectedRoute>
-                <IndexCamas />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/indexcamas" element={<IndexCamas />} />
           <Route
             path="/detailsproducts/:productId"
-            element={
-              <ProtectedRoute>
-                <DetailsProducts />
-              </ProtectedRoute>
-            }
+            element={<DetailsProducts />}
           />
         </Routes>
       </Router>

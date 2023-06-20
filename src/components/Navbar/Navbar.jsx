@@ -5,6 +5,7 @@ import ModalUser from "./ModalUser";
 import { useAuth } from "../../Hooks/useAuth";
 import "./Navbar.scss";
 import UserDefault from "../../img/UserDefault.png";
+import UserLogout from "../../img/UserLogout.png";
 
 function Navbar() {
   const [modalUser, setModalUser] = useState(false);
@@ -57,9 +58,11 @@ function Navbar() {
         </ul>
 
         <img
-          onClick={() => setModalUser(!modalUser)}
+          onClick={() =>
+            user ? setModalUser(!modalUser) : navigate("/loginpage")
+          }
           className="user"
-          src={user?.photoURL || UserDefault}
+          src={user ? user?.photoURL || UserDefault : UserLogout}
           alt="user"
         />
 
