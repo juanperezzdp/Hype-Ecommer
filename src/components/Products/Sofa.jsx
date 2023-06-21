@@ -4,6 +4,7 @@ import { db } from "../../firebase.config/FireBase";
 import "./CartStyle.scss";
 import { CartProvider, cartReducer } from "../../context/cartContext";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 function Sofa() {
   const [state, dispatch] = useReducer(cartReducer, { cartItems: [] });
@@ -37,66 +38,72 @@ function Sofa() {
 
   return (
     <>
-      <CartProvider
-        value={{
-          cartItems: state.cartItems,
-          contador: state.cartItems.length,
-          dispatch,
-        }}
-      >
-        <div className="container-wrap">
-          {products.map((product) => {
-            const discount =
-              (parseFloat(product.price) * parseFloat(product.stock)) / 100;
-            const discountedPrice = parseFloat(product.price) - discount;
-            const formattedDiscountedPrice =
-              discountedPrice.toLocaleString("es-CO");
+      {products ? (
+        <>
+          <CartProvider
+            value={{
+              cartItems: state.cartItems,
+              contador: state.cartItems.length,
+              dispatch,
+            }}
+          >
+            <div className="container-wrap">
+              {products.map((product) => {
+                const discount =
+                  (parseFloat(product.price) * parseFloat(product.stock)) / 100;
+                const discountedPrice = parseFloat(product.price) - discount;
+                const formattedDiscountedPrice =
+                  discountedPrice.toLocaleString("es-CO");
 
-            return (
-              <div className="container-pruducts" key={product.title}>
-                <div>
-                  <img
-                    className="container-img-products"
-                    src={product.urls}
-                    alt="Img"
-                  />
-                </div>
-                <div className="container-products-title-price">
-                  <div className="container-title-products">
-                    <div className="container-title-description-price">
-                      <h3>{product.title.toString()}</h3>
-                      <p className="price">
-                        $
-                        {typeof product.price === "string" &&
-                          parseFloat(product.price).toLocaleString("es-CO")}
-                      </p>
-                      <p className="total-price">
-                        $ {formattedDiscountedPrice}
-                      </p>
+                return (
+                  <div className="container-pruducts" key={product.title}>
+                    <div>
+                      <img
+                        className="container-img-products"
+                        src={product.urls}
+                        alt="Img"
+                      />
                     </div>
+                    <div className="container-products-title-price">
+                      <div className="container-title-products">
+                        <div className="container-title-description-price">
+                          <h3>{product.title.toString()}</h3>
+                          <p className="price">
+                            $
+                            {typeof product.price === "string" &&
+                              parseFloat(product.price).toLocaleString("es-CO")}
+                          </p>
+                          <p className="total-price">
+                            $ {formattedDiscountedPrice}
+                          </p>
+                        </div>
 
-                    <p className="stock">-{product.stock}%</p>
+                        <p className="stock">-{product.stock}%</p>
+                      </div>
+                    </div>
+                    <div className="container-btn-shopping">
+                      <button
+                        className="btn-shopping"
+                        onClick={() => addToCart(product)}
+                      >
+                        Añadir al carrito
+                      </button>
+                      <button
+                        className="btn-add"
+                        onClick={() => handleDataClick(product)}
+                      >
+                        Ver detalles
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="container-btn-shopping">
-                  <button
-                    className="btn-shopping"
-                    onClick={() => addToCart(product)}
-                  >
-                    Añadir al carrito
-                  </button>
-                  <button
-                    className="btn-add"
-                    onClick={() => handleDataClick(product)}
-                  >
-                    Ver detalles
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </CartProvider>
+                );
+              })}
+            </div>
+          </CartProvider>
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }

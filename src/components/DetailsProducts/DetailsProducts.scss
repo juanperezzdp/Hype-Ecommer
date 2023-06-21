@@ -1,5 +1,8 @@
 .container-datails{
     display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
     gap: 3rem;
 
     .container-img-details{
@@ -14,6 +17,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
         .btn-product-image{
             cursor: pointer;
             width: 5rem;
@@ -27,12 +31,13 @@
     .img-products-view{
         margin-top: 5rem;
         height: 30rem;
-        border: 2px solid seagreen;
-        
+        border: 2px solid seagreen;  
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
+
+       
 
     }
 
@@ -42,6 +47,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        color: white;
 
         .cart-details-description{
             width: 25rem;
@@ -55,24 +61,84 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-                
-                margin-top: 1rem;
+                margin-top: 2rem;
 
             .details-description{
                 
             }
             .details-percentage{
                 padding: 0.7rem 1rem;
-                background-color: darkred;
+                background-color: #b80606;
                 color: white;
                 border-radius: 0.5rem;
             }
         }
 
-        .details-price{
-            margin-top: 1rem;
-            
+        .container-details-price{
+            height: 8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .details-price{
+                text-decoration: line-through;
+                font-size: 1.5rem;
+                color: #7f1e1e;
+            }
+            .details-price-total{
+                font-size: 2rem;
+            }
         }
+        }
+    }
+}
+
+@media (max-width: 600px) { 
+    .container-datails{
+        flex-direction: column;
+        gap: 3rem;
+    
+        .container-img-details{
+            flex-direction: column-reverse;
+            
+    
+            .container-btn-product-image{
+                width: 100%;
+                height: 6rem;
+                flex-direction: row;
+                margin-bottom: 0;
+                gap: 0.2rem;
+                
+                
+               
+            .btn-product-image{
+                margin-bottom: 0;   
+            }
+
+        }
+        }
+    
+        .img-products-view{
+            width: 22rem;
+            height: 20rem;
+
+            .img-view{
+            width: 100%;
+            }
+    
+        }
+    
+    
+    
+        .container-details-description{
+           
+    
+            .cart-details-description{
+                width: 100%;
+                margin-top: 0;
+                
+               
+            }
         }
     }
 }

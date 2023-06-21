@@ -19,10 +19,6 @@ function DetailsProducts() {
     setImageWidth(index);
   };
 
-  if (detailData === true) {
-    return <Loading />;
-  }
-
   const discount =
     (parseFloat(detailData.price) * parseFloat(detailData.stock)) / 100;
   const discountedPrice = parseFloat(detailData.price) - discount;
@@ -30,8 +26,9 @@ function DetailsProducts() {
 
   return (
     <>
-      <Navbar />
-      {detailData ? (
+      <>
+        <Navbar />
+
         <div className="container-datails">
           <div className="container-img-details">
             <div className="container-btn-product-image">
@@ -102,7 +99,11 @@ function DetailsProducts() {
               />
             </div>
             <div className="img-products-view">
-              <img src={valueImag ? valueImag : detailData.urls[0]} alt="img" />
+              <img
+                className="img-view"
+                src={valueImag ? valueImag : detailData.urls[0]}
+                alt="img"
+              />
             </div>
           </div>
 
@@ -112,20 +113,22 @@ function DetailsProducts() {
                 <h1 className="details-description">{detailData.title}</h1>
                 <p className="details-percentage">-{detailData.stock}%</p>
               </div>
+              <div className="container-details-price">
+                <p className="details-price">
+                  $
+                  {typeof detailData.price === "string" &&
+                    parseFloat(detailData.price).toLocaleString("es-CO")}
+                </p>
+                <p className="details-price-total">
+                  $ {formattedDiscountedPrice}
+                </p>
+              </div>
 
-              <p className="details-price">
-                $
-                {typeof detailData.price === "string" &&
-                  parseFloat(detailData.price).toLocaleString("es-CO")}
-              </p>
-              <p className="details-price">$ {formattedDiscountedPrice}</p>
               <p>{detailData.description}</p>
             </div>
           </div>
         </div>
-      ) : (
-        <Loading />
-      )}
+      </>
     </>
   );
 }
