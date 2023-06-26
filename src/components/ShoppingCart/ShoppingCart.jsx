@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import "../../components/Products/CartStyle.scss";
 import IconCart from "../IconCart/IconCart";
 import { CartContext } from "../../context/cartContext";
+import Paypal from "../Paypal/Paypal";
 
 function ShoppingCart() {
   const { cartItems, dispatch } = useContext(CartContext);
@@ -66,6 +67,7 @@ function ShoppingCart() {
             </div>
           </>
         ))}
+        <Paypal />
         <IconCart />
       </div>
     </>

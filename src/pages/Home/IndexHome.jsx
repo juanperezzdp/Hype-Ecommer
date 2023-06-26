@@ -14,6 +14,8 @@ function IndexHome() {
   const img = [Img1, Img2, Img3, Img4];
   const imgMobile = [ImgMobile1, ImgMobile2, ImgMobile3, ImgMobile4];
   const slideDuration = 5000;
+  const titleOne = "Nueva llegada";
+  const titletwo = "sofá confort de una nueva colección";
 
   return (
     <div>
@@ -22,6 +24,8 @@ function IndexHome() {
         img={img}
         slideDuration={slideDuration}
         imgMobile={imgMobile}
+        titleOne={titleOne}
+        titletwo={titletwo}
       />
       <Sofa />
     </div>

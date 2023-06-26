@@ -6,10 +6,12 @@ import { useAuth } from "../../Hooks/useAuth";
 import "./Navbar.scss";
 import UserDefault from "../../img/UserDefault.png";
 import UserLogout from "../../img/UserLogout.png";
+import { RiMenu2Fill } from "react-icons/ri";
 
 function Navbar() {
   const [modalUser, setModalUser] = useState(false);
-  const [scrolled, setScrolled] = useState(false); // Estado para controlar el scroll
+  const [scrolled, setScrolled] = useState(false);
+  const [modalNav, setModalNav] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -30,7 +32,14 @@ function Navbar() {
   return (
     <>
       <nav className={scrolled ? "nav-scrolled-white" : "nav-scrolled"}>
-        <ul>
+        <RiMenu2Fill
+          onClick={() => {
+            setModalNav(true);
+          }}
+          className="menu"
+        />
+
+        <ul className={` ${modalNav ? "show" : "menu-modal"}`}>
           <li
             className={scrolled ? "btn-white" : "btn-transparent"}
             onClick={() => {
