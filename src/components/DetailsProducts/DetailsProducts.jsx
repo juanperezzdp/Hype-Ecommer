@@ -42,7 +42,7 @@ function DetailsProducts() {
                   width: imageWidth === 0 ? "6rem" : "5rem",
                   border:
                     imageWidth === 0
-                      ? "2px solid seagreen"
+                      ? "2px solid #2e8a7c"
                       : "2px solid #7878786d",
                 }}
                 src={detailData.urls[0]}
@@ -59,7 +59,7 @@ function DetailsProducts() {
                   width: imageWidth === 1 ? "6rem" : "5rem",
                   border:
                     imageWidth === 1
-                      ? "2px solid seagreen"
+                      ? "2px solid #2e8a7c"
                       : "2px solid #7878786d",
                 }}
                 src={detailData.urls[1]}
@@ -75,7 +75,7 @@ function DetailsProducts() {
                   width: imageWidth === 2 ? "6rem" : "5rem",
                   border:
                     imageWidth === 2
-                      ? "2px solid seagreen"
+                      ? "2px solid #2e8a7c"
                       : "2px solid #7878786d",
                 }}
                 src={detailData.urls[2]}
@@ -91,7 +91,7 @@ function DetailsProducts() {
                   width: imageWidth === 3 ? "6rem" : "5rem",
                   border:
                     imageWidth === 3
-                      ? "2px solid seagreen"
+                      ? "2px solid #2e8a7c"
                       : "2px solid #7878786d",
                 }}
                 src={detailData.urls[3]}

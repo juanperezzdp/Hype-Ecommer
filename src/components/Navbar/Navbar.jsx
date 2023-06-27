@@ -7,6 +7,7 @@ import "./Navbar.scss";
 import UserDefault from "../../img/UserDefault.png";
 import UserLogout from "../../img/UserLogout.png";
 import { RiMenu2Fill } from "react-icons/ri";
+import { AiOutlineClose } from "react-icons/ai";
 
 function Navbar() {
   const [modalUser, setModalUser] = useState(false);
@@ -40,6 +41,10 @@ function Navbar() {
         />
 
         <ul className={` ${modalNav ? "show" : "menu-modal"}`}>
+          <AiOutlineClose
+            onClick={() => setModalNav(!modalNav)}
+            className="x-nav"
+          />
           <li
             className={scrolled ? "btn-white" : "btn-transparent"}
             onClick={() => {

@@ -1,7 +1,7 @@
 
     
     .nav-scrolled-white{
-        background-color: rgb(101, 173, 133);
+        background-color: rgb(46, 139, 125);
         width: 100%;
         height: 4rem;
         display: flex;
@@ -18,6 +18,10 @@
 
         .menu-modal{
             display: flex;
+
+            .x-nav{
+                display: none;
+            }
 
             .btn-white{
                 display: flex;
@@ -60,6 +64,10 @@
 
         .menu-modal{
             display: flex;
+
+            .x-nav{
+                display: none;
+            }
 
             .btn-transparent{
                 display: flex;
@@ -142,16 +150,16 @@
             height: 2rem;
                 width: 8rem;
                 border: none;
-                background-color: seagreen;
+                background-color: rgb(46, 139, 125);
                 border-radius: 2rem;
                 color: white;
                 font-size: 1rem;
                 cursor: pointer;
 
                 &:hover{
-                    border: 2px solid seagreen;
+                    border: 2px solid rgb(46, 139, 125);
                     background-color: white;
-                    color:seagreen;
+                    color:rgb(46, 139, 125);
                 }
 
         }
@@ -161,6 +169,7 @@
 
     @media (max-width: 768px) {
         .nav-scrolled-white{
+            
             .menu{
                display: block;
                font-size: 2.5rem;
@@ -171,8 +180,59 @@
             }
             .menu-modal{
                 display: none;
+            }
+
+            .show{
+                width: 10rem;
+                height: 15rem;
+                margin-top: 13rem;
+                position: fixed;
+                background-color: #2e5e8b;
+                margin-left: -2rem;
+                border-radius: 0  1rem 1rem 0;
+                overflow: hidden;
+                animation-name: navbar;
+                animation-duration: 1s;
+                animation-fill-mode: both;
+
+                @keyframes navbar {
+                    0% {
+                      
+                      transform: translateX(-100%);
+                    }
+                    100% {
+                      
+                      transform: translateX(0);
+                    }
+                  }
+
+                .x-nav{
+                    display: flex;
+                    margin-left: auto;
+                    margin-top: 0.5rem;
+                    margin-right: 0.5rem;
+                    font-size: 1.2rem; 
+                    cursor: pointer;
+                    width: 2rem;
+                    color: white;
+
+                    &:hover{
+                        color: black;
+                    }
+                }
                 .btn-white{
-                    
+                    display: flex;
+                align-items: center;
+                height: 4rem;
+                color: white;
+                margin-right: 0.2rem;
+                padding: 0 1.5rem;
+                text-decoration: none;
+                cursor: pointer;
+                font-size: 1.2rem;
+                &:hover{
+                    background-color: rgba(0, 0, 0, 0.142);
+                }
                 }
             }
           }
@@ -189,11 +249,73 @@
             }
             .menu-modal{
                 display: none;
-    
-                .btn-transparent{
-                    
             }
-        }
+
+                .show{
+                    width: 10rem;
+                    height: 15rem;
+                    margin-top: 13rem;
+                    position: fixed;
+                    background-color: #2e5e8b;
+                    margin-left: -2rem;
+                    border-radius: 0  1rem 1rem 0;
+                    overflow: hidden;
+                    animation-name: navbar;
+                    animation-duration: 1s;
+                    animation-fill-mode: both;
+    
+                    @keyframes navbar {
+                        0% {
+                          
+                          transform: translateX(-100%);
+                        }
+                        100% {
+                          
+                          transform: translateX(0);
+                        }
+                      }
+    
+                    .x-nav{
+                        display: flex;
+                        margin-left: auto;
+                        margin-top: 0.5rem;
+                        margin-right: 0.5rem;
+                        font-size: 1.2rem; 
+                        cursor: pointer;
+                        width: 2rem;
+                        color: white;
+    
+                        &:hover{
+                            color: black;
+                        }
+                    }
+                    .btn-transparent{
+                        display: flex;
+                    align-items: center;
+                    height: 4rem;
+                    color: white;
+                    margin-right: 0.2rem;
+                    padding: 0 1.5rem;
+                    text-decoration: none;
+                    cursor: pointer;
+                    font-size: 1.2rem;
+                    &:hover{
+                        background-color: rgba(0, 0, 0, 0.142);
+                    }
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+    
+        
     }
     
     

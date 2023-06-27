@@ -79,31 +79,31 @@
                 height: 2rem;
                 width: 8rem;
                 border: none;
-                background-color: seagreen;
+                background-color: rgb(46, 139, 125);
                 border-radius: 2rem;
                 color: white;
                 font-size: 1rem;
                 cursor: pointer;
 
                 &:hover{
-                    border: 2px solid seagreen;
+                    border: 2px solid rgb(46, 139, 125);
                     background-color: white;
-                    color:seagreen;
+                    color:rgb(46, 139, 125);
                 }
             }
             .btn-add{
                 height: 2rem;
                 width: 8rem;
-                border: 2px solid seagreen;
+                border: 2px solid rgb(46, 139, 125);
                 background-color: white;
                 border-radius: 2rem;
-                color:seagreen;
+                color:rgb(46, 139, 125);
                 font-size: 1rem;
                 cursor: pointer;
 
                 &:hover{
                     border: none;
-                    background-color: seagreen;
+                    background-color: rgb(46, 139, 125);
                     color: white;
                 }
             }
