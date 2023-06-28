@@ -84,7 +84,6 @@ function Navbar() {
           <ModalUser modalUser={modalUser} setModalUser={setModalUser} />
         )}
       </nav>
-
       <IconCart />
     </>
   );
