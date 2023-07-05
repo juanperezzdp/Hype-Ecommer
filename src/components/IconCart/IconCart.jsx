@@ -1,13 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { BsCartCheck, BsCartDash } from "react-icons/bs";
 import "./IconCart.scss";
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/cartContext";
 
 function IconCart() {
-  const { contador } = useContext(CartContext);
   const navigate = useNavigate();
-
+  const { count } = useContext(CartContext);
   const handleNavigateShopping = () => {
     navigate("/shoppingcart");
   };
@@ -16,18 +15,18 @@ function IconCart() {
     <div className="container-btn-pt">
       <div
         style={{
-          backgroundColor: contador === 1 ? "#000000a6" : "rgb(46, 139, 125)",
+          backgroundColor: count >= 1 ? "rgb(46, 139, 125)" : "#000000a6",
         }}
         className="container-btn-cart"
         onClick={handleNavigateShopping}
       >
         <div className="btn-cart">
-          {contador === 0 ? (
+          {count === 0 ? (
             <BsCartDash className="icon-btn" />
           ) : (
             <BsCartCheck className="icon-btn" />
           )}
-          {contador && <p>{contador}</p>}
+          {count > 0 && <p>{count}</p>}
         </div>
       </div>
     </div>

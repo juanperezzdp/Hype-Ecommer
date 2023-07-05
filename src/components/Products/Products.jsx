@@ -1,17 +1,21 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState, useContext } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.config/FireBase";
 import "./CartStyle.scss";
-import { CartProvider, cartReducer } from "../../context/cartContext";
+import {
+  CartProvider,
+  cartReducer,
+  CartContext,
+} from "../../context/cartContext";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 
-function Sofa() {
-  const [state, dispatch] = useReducer(cartReducer, { cartItems: [] });
+function Products({ props }) {
+  const { cartItems, dispatch, count, setCount } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  const productsCollection = collection(db, "products");
+  const productsCollection = collection(db, props);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -19,15 +23,22 @@ function Sofa() {
       setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
+    const savedCount = localStorage.getItem("count");
+    if (savedCount) {
+      setCount(Number(savedCount));
+    }
+
     getProducts();
-  }, [productsCollection]);
+  }, [productsCollection, setCount]);
 
   const addToCart = (product) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
 
     // Save cart data to localStorage
-    const updatedCartItems = [...state.cartItems, product];
+    const updatedCartItems = [...cartItems, product];
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    setCount(count + 1);
+    localStorage.setItem("count", count + 1);
   };
 
   const handleDataClick = (product) => {
@@ -40,13 +51,7 @@ function Sofa() {
     <>
       {products ? (
         <>
-          <CartProvider
-            value={{
-              cartItems: state.cartItems,
-              contador: state.cartItems.length,
-              dispatch,
-            }}
-          >
+          <CartProvider>
             <div className="container-wrap">
               {products.map((product) => {
                 const discount =
@@ -77,7 +82,6 @@ function Sofa() {
                             $ {formattedDiscountedPrice}
                           </p>
                         </div>
-
                         <p className="stock">-{product.stock}%</p>
                       </div>
                     </div>
@@ -108,4 +112,4 @@ function Sofa() {
   );
 }
 
-export default Sofa;
+export default Products;

@@ -37,7 +37,6 @@ function CreateProducts() {
         urls: urls,
       });
 
-      // Limpiar el formulario después de enviar
       handleFormReset();
     } catch (error) {
       alert("Intente más tarde");
@@ -45,7 +44,6 @@ function CreateProducts() {
   };
 
   const handleFormReset = () => {
-    // Limpiar el formulario al hacer clic en "Limpiar"
     setFiles(null);
     setTitle("");
     setDescription("");
@@ -69,6 +67,7 @@ function CreateProducts() {
           <select value={selectedOption} onChange={handleSelectChange}>
             <option value="products">Sofas</option>
             <option value="camas">Camas</option>
+            <option value="juego de comedor">Juego de comedor</option>
           </select>
         </div>
         <div>
@@ -102,15 +101,15 @@ function CreateProducts() {
         </div>
 
         <div>
-          <label className="label-create" htmlFor="Stock">
-            Stock:
+          <label className="label-create" htmlFor="discount">
+            Descuento:
           </label>
           <input
             className="input-create"
-            placeholder="Stock"
+            placeholder="discount"
             type="number"
-            name="Stock"
-            id="Stock"
+            name="discount"
+            id="discount"
             accept="image/*"
             value={stock}
             onChange={(e) => setStock(e.target.value)}

@@ -1,4 +1,3 @@
-import Sofa from "../../components/Products/Sofa";
 import Navbar from "../../components/Navbar/Navbar";
 import ImgCarousel from "../../components/ImgCarousel/ImgCarousel";
 import Img1 from "../../img/Salahome.jpg";
@@ -9,6 +8,7 @@ import ImgMobile1 from "../../img/img responsive/Salahome.jpg";
 import ImgMobile2 from "../../img/img responsive/Dormitorio.jpg";
 import ImgMobile3 from "../../img/img responsive/Sofa-reponsive.jpg";
 import ImgMobile4 from "../../img/img responsive/sala.png";
+import Products from "../../components/Products/Products";
 
 function IndexHome() {
   const img = [Img1, Img2, Img3, Img4];
@@ -27,7 +27,7 @@ function IndexHome() {
         titleOne={titleOne}
         titletwo={titletwo}
       />
-      <Sofa />
+      <Products props={"products"} />
     </div>
   );
 }

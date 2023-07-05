@@ -1,11 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import "../../components/Products/CartStyle.scss";
 import IconCart from "../IconCart/IconCart";
 import { CartContext } from "../../context/cartContext";
-import Paypal from "../Paypal/Paypal";
+import NoHayProductos from "../../img/NoHayProductos.png";
 
 function ShoppingCart() {
-  const { cartItems, dispatch } = useContext(CartContext);
+  const { cartItems, dispatch, count, setCount } = useContext(CartContext);
 
   const removeFromCart = (product) => {
     const index = cartItems.findIndex((item) => item.id === product.id);
@@ -14,25 +14,31 @@ function ShoppingCart() {
       updatedCartItems.splice(index, 1);
       dispatch({ type: "SET_CART_ITEMS", payload: updatedCartItems });
       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      setCount(count - 1);
+      localStorage.setItem("count", count - 1);
     }
   };
 
   useEffect(() => {
     const savedCartItems = localStorage.getItem("cartItems");
+    const savedCount = localStorage.getItem("count");
     if (savedCartItems) {
       const parsedCartItems = JSON.parse(savedCartItems);
       dispatch({ type: "SET_CART_ITEMS", payload: parsedCartItems });
     }
-  }, [dispatch]);
+    if (savedCount) {
+      setCount(Number(savedCount));
+    }
+  }, [dispatch, setCount]);
 
   console.log(cartItems);
 
   return (
     <>
-      <h1>Productos:</h1>
-      <div className="container-wrap">
-        {cartItems.map((product, index) => (
-          <>
+      <IconCart />
+      {cartItems && cartItems.length ? (
+        <div className="container-wrap">
+          {cartItems.map((product, index) => (
             <div className="container-pruducts" key={index}>
               <div>
                 <img
@@ -51,25 +57,30 @@ function ShoppingCart() {
                         parseFloat(product.price).toLocaleString("es-CO")}
                     </p>
                   </div>
-
                   <p className="stock">-{product.stock}%</p>
                 </div>
               </div>
               <div className="container-btn-shopping">
                 <button className="btn-shopping">Añadir al carrito</button>
                 <button
-                  onClick={() => removeFromCart(product)}
+                  onClick={() => {
+                    removeFromCart(product);
+                  }}
                   className="btn-add"
                 >
                   Eliminar
                 </button>
               </div>
             </div>
-          </>
-        ))}
-        <Paypal />
-        <IconCart />
-      </div>
+          ))}
+        </div>
+      ) : (
+        <img
+          style={{ width: "30%", height: "90vh" }}
+          src={NoHayProductos}
+          alt="img"
+        />
+      )}
     </>
   );
 }

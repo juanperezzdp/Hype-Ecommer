@@ -1,11 +1,11 @@
 import Navbar from "../../components/Navbar/Navbar";
-import Camas from "../../components/Products/Camas";
+import Products from "../../components/Products/Products";
 
 function IndexCamas() {
   return (
     <>
       <Navbar />
-      <Camas />
+      <Products props={"camas"} />
     </>
   );
 }
