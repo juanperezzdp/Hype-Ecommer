@@ -26,7 +26,7 @@ function IconCart() {
           ) : (
             <BsCartCheck className="icon-btn" />
           )}
-          {count > 0 && <p>{count}</p>}
+          {count}
         </div>
       </div>
     </div>

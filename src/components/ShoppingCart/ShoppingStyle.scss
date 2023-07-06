@@ -1,0 +1,13 @@
+.container-shopping-wrap{
+    display: flex;
+    margin-top: 1rem;
+    margin-left: 1rem;
+
+
+    .container-shopping-pruducts{
+        display: flex;
+        border: 2px solid black;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+}
