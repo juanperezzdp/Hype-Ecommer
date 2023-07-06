@@ -1,14 +1,110 @@
+
 .container-shopping-wrap{
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
     margin-left: 1rem;
+    gap: 1rem;
 
 
     .container-shopping-pruducts{
         display: flex;
-        border: 2px solid black;
+        border: 2px solid rgba(0, 104, 61, 0.426);
         border-radius: 1rem;
         overflow: hidden;
+        width: 30rem;
+        height: 12rem;
+        gap: 1rem;
+        
+
+        .img-shopping{
+            width: 12rem;
+
+        }
+
+        .container-title-shopping{
+            margin-top: 1rem;
+
+
+            .price-shopping{
+                margin-top: 0.5rem;
+                padding: 0;
+                color: rgba(148, 0, 0, 0.847);
+                text-decoration: line-through;
+            }
+
+            .price-total-shopping{
+                font-size: 1.2rem;
+                margin-top: 0.5rem;
+            }
+
+            .quantity{
+                font-size: 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .btn-container{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                height: 5rem;
+
+
+                .btn-add-more{
+                    height: 2rem;
+                    width: 8rem;
+                    border: none;
+                    background-color: rgb(46, 139, 125);
+                    border-radius: 2rem;
+                    color: white;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    
+
+                    &:hover{
+                        border: 2px solid rgb(46, 139, 125);
+                        background-color: white;
+                        color:rgb(46, 139, 125);
+                    }
+
+                }
+                .btn-clean-shopping{
+                    height: 2rem;
+                    width: 8rem;
+                    border: 2px solid rgb(46, 139, 125);
+                    background-color: white;
+                    border-radius: 2rem;
+                    color:rgb(46, 139, 125);
+                    font-size: 1rem;
+                    cursor: pointer;
+
+                    &:hover{
+                        border: none;
+                        background-color: rgb(46, 139, 125);
+                        color: white;
+                    }
+                }
+
+            }
+        }
     }
 }
+
+
+//not added products
+
+.header-not-products{
+    display: flex;
+
+    .not-products-container-img{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        .not-products-img{
+            width: 20rem;
+        }
+    }
+}
+//end not added products

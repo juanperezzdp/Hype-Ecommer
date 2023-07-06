@@ -65,6 +65,12 @@ function ShoppingCart() {
     localStorage.setItem("count", count + 1);
   };
 
+  const getDiscountedPrice = (product) => {
+    const discount = (product.stock / 100) * getTotalPrice(product.id);
+    const discountedPrice = getTotalPrice(product.id) - discount;
+    return discountedPrice;
+  };
+
   return (
     <>
       <IconCart />
@@ -73,50 +79,49 @@ function ShoppingCart() {
           {getUniqueProducts().map((product) => (
             <div className="container-shopping-pruducts" key={product.id}>
               <div>
-                <img
-                  style={{ width: "10rem" }}
-                  className="container-img-products"
-                  src={product.urls}
-                  alt="Img"
-                />
+                <img className="img-shopping" src={product.urls} alt="Img" />
               </div>
               <div>
-                <div className="container-title-products">
-                  <div className="container-title-description">
-                    <h3>{product.title.toString()}</h3>
-                    <p className="price">
-                      ${getTotalPrice(product.id).toLocaleString("es-CO")}
-                    </p>
+                <div className="container-title-shopping">
+                  <h3>{product.title.toString()}</h3>
+                  <p className="price-shopping">
+                    $
+                    {typeof product.price === "string" &&
+                      parseFloat(product.price).toLocaleString("es-CO")}
+                  </p>
+                  <p className="price-total-shopping">
+                    ${getDiscountedPrice(product).toLocaleString("es-CO")}
+                  </p>
+                  <p className="quantity">Cantidad: {product.quantity}</p>
+                  <div className="btn-container">
+                    <button
+                      className="btn-add-more"
+                      onClick={() => addToCart(product)}
+                    >
+                      Añadir mas
+                    </button>
+                    <button
+                      onClick={() => {
+                        removeFromCart(product.id);
+                      }}
+                      className="btn-clean-shopping"
+                    >
+                      Eliminar
+                    </button>
                   </div>
-                  <p className="stock">-{product.stock}%</p>
-                  <p className="quantity">Quantity: {product.quantity}</p>
                 </div>
               </div>
-              <div className="container-btn-shopping">
-                <button
-                  className="btn-shopping"
-                  onClick={() => addToCart(product)}
-                >
-                  Añadir mas
-                </button>
-                <button
-                  onClick={() => {
-                    removeFromCart(product.id);
-                  }}
-                  className="btn-add"
-                >
-                  Eliminar
-                </button>
-              </div>
+              <p className="stock">-{product.stock}%</p>
             </div>
           ))}
         </div>
       ) : (
-        <img
-          style={{ width: "30%", height: "90vh" }}
-          src={NoHayProductos}
-          alt="img"
-        />
+        <div className="header-not-products">
+          <div className="not-products-container-img">
+            <img className="not-products-img" src={NoHayProductos} alt="img" />
+          </div>
+          <div></div>
+        </div>
       )}
     </>
   );
