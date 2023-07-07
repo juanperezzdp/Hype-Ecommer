@@ -5,6 +5,8 @@ import { CartContext } from "../../context/cartContext";
 import NoHayProductos from "../../img/NoHayProductos.png";
 import "./ShoppingStyle.scss";
 
+import Paypal from "../Paypal/Paypal";
+
 function ShoppingCart() {
   const { cartItems, dispatch, count, setCount } = useContext(CartContext);
 
@@ -17,7 +19,7 @@ function ShoppingCart() {
       dispatch({ type: "SET_CART_ITEMS", payload: updatedCartItems });
       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
 
-      const newCount = count - 1; // Calculate the new count
+      const newCount = count - 1;
       setCount(newCount);
       localStorage.setItem("count", newCount);
     }
@@ -114,6 +116,8 @@ function ShoppingCart() {
               <p className="stock">-{product.stock}%</p>
             </div>
           ))}
+
+          <Paypal totalValue={"10.00"} invoice={"sofa"} />
         </div>
       ) : (
         <div className="header-not-products">

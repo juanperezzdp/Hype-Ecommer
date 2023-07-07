@@ -1,42 +1,27 @@
-import React, { useEffect } from "react";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+import React from "react";
 
-function Paypal() {
-  function renderPaypalButton() {
-    paypal
-      .Buttons({
-        createOrder: async () => {
-          try {
-            const response = await fetch("http://localhost:8000/create-order", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(),
-            });
-            const data = await response.json();
-            return data.id;
-          } catch (error) {
-            console.log(error);
-          }
-        },
-        onCancel: function (data) {
-          console.log("Compra cancelada");
-        },
-        onApprove: function (data, actions) {
-          console.log(data);
-          return actions.order.capture();
-        },
-      })
-      .render("#paypal-button-container");
-  }
-
-  useEffect(() => {
-    renderPaypalButton();
-  }, []);
-
+function Paypal(props) {
   return (
     <div>
-      <div id="paypal-button-container"></div>
+      <PayPalButtons
+        createOrder={(data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: props.invoice,
+                amount: {
+                  value: props.totalValue,
+                },
+              },
+            ],
+          });
+        }}
+        onApprove={async (data, actions) => {
+          const order = await actions.order?.capture();
+          console.log("order:", order);
+        }}
+      ></PayPalButtons>
     </div>
   );
 }
